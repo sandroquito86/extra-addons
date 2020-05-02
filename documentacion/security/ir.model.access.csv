@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_documentacion_documentacion,documentacion.documentacion,model_documentacion_documentacion,base.group_user,1,1,1,1
+access_hijo_hijo,hijo.hijo,model_hijo_hijo,base.group_user,1,1,1,1

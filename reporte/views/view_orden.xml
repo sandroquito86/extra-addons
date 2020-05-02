@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+        <!-- session form view -->
+        <record model="ir.ui.view" id="orden_form_view">
+            <field name="name">orden form</field>
+            <field name="model">reporte.orden</field>
+            <field name="arch" type="xml">
+                <form string="Orden Form">
+                    <sheet>
+                        <group>
+                            <field name="nombre"/>
+                        </group>
+                        <notebook>
+                            <page string="Reporte">
+                                <field name="reporte_id"/>
+                            </page>
+                            <page string="About">
+                                This is an example of notebooks
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- explicit list view definition-->
+        <record model="ir.ui.view" id="reporte_orden_list">
+            <field name="name">reporte orden</field>
+            <field name="model">reporte.orden</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nombre"/>
+                    <field name="invoice_line_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="reporte_orden_action_window">
+            <field name="name">Registro de ORDEN</field>
+            <field name="res_model">reporte.orden</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Orden" id="reporte_menu_2_list" parent="reporte.menu_1"
+                  action="reporte_orden_action_window"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,67 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="unidad_form_view">
+            <field name="name">unidad form</field>
+            <field name="model">reportecovid19.unidades</field>
+            <field name="arch" type="xml">
+                <form string="Orden Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                           
+                        </group>
+                        <notebook>
+                            <page string="Ciudades">
+                                <field name="city_id">
+                                  <tree editable="botton">
+                                    <field name="name"/>
+                                    <field name="unidad_militar"/>
+                                  </tree>
+                                </field>
+                            </page>
+                            <page string="About">
+                                This is an example of notebooks
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="rep_unidad_list">
+            <field name="name">Unidad</field>
+            <field name="model">reportecovid19.unidades</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="unidad_action_window">
+            <field name="name">Registro de UNIDAD </field>
+            <field name="res_model">reportecovid19.unidades</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    <!-- Top menu item -->
+
+    <menuitem name="issues" id="issues.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Menu 1" id="issues_menu_1" parent="issues.menu_root"/>
+    <menuitem name="Menu 2" id="issues.menu_2" parent="issues.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Unidades" id="issues.menu_1_list" parent="issues_menu_1"
+              action="unidad_action_window"/>
+    
+
+  </data>
+</odoo>

@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="unidad_form_view">
+            <field name="name">unidad form</field>
+            <field name="model">rep.unidad</field>
+            <field name="arch" type="xml">
+                <form string="Orden Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="country_id"/>
+                            <field name="state_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Ciudades">
+                                <field name="city_id"/>
+                            </page>
+                            <page string="About">
+                                This is an example of notebooks
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="rep_unidad_list">
+            <field name="name">Unidad</field>
+            <field name="model">rep.unidad</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="unidad_action_window">
+            <field name="name">Registro de UNIDAD </field>
+            <field name="res_model">rep.unidad</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Unidad" id="reporte_menu_3_list" parent="reporte.menu_1"
+                  action="unidad_action_window"/>
+
+    </data>
+</odoo>

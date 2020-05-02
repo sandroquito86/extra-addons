@@ -1,0 +1,212 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="documentacion.list">
+      <field name="name">documentacion list</field>
+      <field name="model">documentacion.documentacion</field>
+      <field name="arch" type="xml">
+        <!--DECORANDO CON CONDICIONES  -->
+        <!-- decoration-info="value=='100'" decoration-danger="value=='150'" 
+        -->
+
+        <!--TIPOS DE CONDICIONES EN XML -->
+        <!--lt; (<), &amp; (&), &gt; (>), &quot; ("), and &apos; ('). -->
+
+        <!--duracion menor a 5 y duracion mayor a 15  -->
+        <!--en caso de querer editar el arbol editable="botton" -->
+        
+        
+        <tree decoration-info="duration&lt;5" decoration-danger="duration&gt;15">        
+        
+          <field name="id"/>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="hijo"/>
+          <!--permite mencionar al campo pero que no este visible -->
+          <field name="duration" invisible="1"/>
+
+
+        </tree>
+      </field>
+    </record>
+
+    <!--SEARCH oosearch -->
+    <record id="model_name_view_search" model="ir.ui.view">
+      <field name="name">documentacion.search</field>
+      <field name="model">documentacion.documentacion</field>
+      <field name="arch" type="xml">
+        <search string="">
+          <!--realiza criterios de busqueda por las variables que se definan
+            de no hacerlo el busca por defecto solo por el NAME
+        -->
+          <field name="name" filter_domain="['|',('name', 'ilike', self), ('value', 'ilike', self)]"/>
+
+          <!--permite crear un nombre de un filtro con su respectiva condicion-->
+          <filter name="filtro" string="valor1000" domain="[('value', '=', 1000)]" />
+
+          <!--permite agrupar  por un criterio-->
+          <group>
+            <filter name="value" string="Agrupar valores" context="{'group_by': 'value' }" />
+          </group>
+
+        </search>
+      </field>
+    </record>
+
+    <record id="model_name_view_kanban" model="ir.ui.view">
+      <field name="name">documentacion kanban</field>
+      <field name="model">documentacion.documentacion</field>
+      <field name="arch" type="xml">
+        <kanban>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="description"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click">
+                <div class="o_kanban_image">
+                  <img src='/documentacion/static/avatar_grey.png' style="max-height: 45px;"/>
+                </div>
+                <div class="oe_kanban_details">
+                  <strong class="o_kanban_record_title">
+                    <field name="name"/>
+                  </strong>
+                  <div t-if="record.value.value">
+                    <t t-esc="record.value.value"/>
+                  </div>
+                  <div t-if="record.description.value">
+                    <t t-esc="record.description.value"/>
+                  </div>
+                </div>
+              </div>
+
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="documentacion.form">
+      <field name="name">prueba form</field>
+      <field name="model">documentacion.documentacion</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+           
+            <button string="SEARCH" name="busqueda_search" type="object" class="oe_highlight"/>
+            <button string="SEARCH_READ" name="busqueda_search_read" type="object" class="oe_highlight"/>
+            <button string="BROWSE" name="busqueda_browse" type="object" class="oe_highlight"/>
+            <button string="ENVIRONMENT AND SELF" name="environment_self" type="object" class="oe_highlight"/>  
+            <button string="POST" name="postedaction" type="object" states="draft" class="oe_highlight"/>            
+            <button string="DRAFT" name="draftaction" type="object" states="posted" class="oe_highlight"/> 
+            <field name="state" widget="statusbar" statusbar_visible="draft,posted"/>   
+
+                   
+            
+           
+          </header>
+          <sheet>
+
+          
+          <!--BOTONES-->
+            <div class="oe_button_box" name="button_box">
+              <button name="abrir_hijo" type="object" class="oe_stat_button" icon="fa-archive">
+              <field name="contador" widget="statinfo"/>
+              </button>
+            </div>
+
+
+            <group>
+              
+              <field name="name"/>
+              <field name="value" widget="float_toggle" options='{"range":[1,2,3,4,5,6,]}'/>
+              <field name="value2"/>
+              <field name="description"/>
+              <field name="var_unicode"/>
+              <field name="indice"/>
+              <field name="duration"/>
+              <field name="hijo"/>
+              <field name="edad" />
+
+
+
+
+            </group>
+
+            <group>
+              <notebook>
+                <page string="Description">
+                  <field name="name"/>
+                  <field name="duration"/>
+                  <field name="selection_field"/>
+                  <field name="activar"/>
+
+
+                </page>
+
+                <page string="About">
+
+                  <label for="attendee_ids" />
+                  <field name="pais_id" widget="many2many_tags" attrs="{'invisible': [('contador', '=', 1)]}" options="{'no_create_edit': True}"/>
+
+
+
+                </page>
+
+
+              </notebook>
+            </group>
+
+
+
+
+
+
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="documentacion.action_window">
+      <field name="name">documentacion window</field>
+      <field name="res_model">documentacion.documentacion</field>
+      <field name="context" eval="{'search_default_filtro':1}"></field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+    <record model="ir.actions.server" id="documentacion.action_server">
+      <field name="name">documentacion server</field>
+      <field name="model_id" ref="model_documentacion_documentacion"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem name="documentacion" id="documentacion.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Menu 1" id="documentacion.menu_1" parent="documentacion.menu_root"/>
+    <menuitem name="Menu 2" id="documentacion.menu_2" parent="documentacion.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="List" id="documentacion.menu_1_list" parent="documentacion.menu_1" action="documentacion.action_window"/>
+    <menuitem name="Server to list" id="documentacion" parent="documentacion.menu_2" action="documentacion.action_server"/>
+
+  </data>
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_reporte_reporte,reporte.reporte,model_reporte_reporte,base.group_user,1,1,1,1
+access_reporte_orden,reporte.orden,model_reporte_orden,base.group_user,1,1,1,1
+access_rep_unidad,rep.unidad,model_rep_unidad,base.group_user,1,1,1,1
+access_rep_covid,rep.covid,model_rep_covid,base.group_user,1,1,1,1
+access_rep_covid_linea,rep.covid.linea,model_rep_covid_linea,base.group_user,1,1,1,1

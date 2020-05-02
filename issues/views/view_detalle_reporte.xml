@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="reportecovid19_detalle_form_view">
+            <field name="name">COVID linea form</field>
+            <field name="model">reportecovid19.detalle</field>
+            <field name="arch" type="xml">
+                <form string="Reporte Covid Linea Form">
+                    <sheet>
+                        <group>
+                            <field name="cama_disponible"/>
+                            <field name="cuarentena_of_m"/>
+                            <field name="unidad_id"/>
+                            <field name="ciudad_id"/>
+                            <!--field name="state_id"/-->
+                        </group>
+                        <notebook>
+                            <!--page string="Lineas">
+                                <field name="reportecovid19.detalle"/>
+                            </page-->
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="reportecovid19_detalle_list">
+            <field name="name">Reporte COVID linea</field>
+            <field name="model">reportecovid19.detalle</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="unidad_id"/>
+                    <field name="ciudad_id"/>
+                    <field name="cama_disponible"/>
+                    <field name="cuarentena_of_m"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="reportecovid19_detalle_action_window">
+            <field name="name">Registro de COVID </field>
+            <field name="res_model">reportecovid19.detalle</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Reporte DETALLE" id="reporte_menu_5_list" parent="issues_menu_1"
+                  action="reportecovid19_detalle_action_window"/>
+
+    </data>
+</odoo>

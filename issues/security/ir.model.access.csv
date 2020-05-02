@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_issues_issues,issues.issues,model_issues_issues,base.group_user,1,1,1,1
+access_reportecovid19_ciudad,reportecovid19.ciudad,model_reportecovid19_ciudad,base.group_user,1,1,1,1
+access_reportecovid19_unidades,reportecovid19.unidades,model_reportecovid19_unidades,base.group_user,1,1,1,1
+access_reportecovid19_reporte,reportecovid19.reporte,model_reportecovid19_reporte,base.group_user,1,1,1,1
+access_reportecovid19_detalle,reportecovid19.detalle,model_reportecovid19_detalle,base.group_user,1,1,1,1

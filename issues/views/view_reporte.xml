@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="reportecovid19_reporte_form_view">
+            <field name="name">COVID form</field>
+            <field name="model">reportecovid19.reporte</field>
+            <field name="arch" type="xml">
+                <form string="Reporte Covid Form">
+                    <sheet>
+                        <group>
+                            <field name="fecha_hora"/>
+                            <!--field name="country_id"/>
+                            <field name="state_id"/-->
+                        </group>
+                        <notebook>
+                            <page string="Lineas">
+                                <field name="rep_covid_linea"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="reportecovid19_reporte_list">
+            <field name="name">Reporte COVID</field>
+            <field name="model">reportecovid19.reporte</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="fecha_hora"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="reportecovid19_reporte_action_window">
+            <field name="name">Registro de COVID </field>
+            <field name="res_model">reportecovid19.reporte</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Reporte COVID" id="reporte_menu_4_list" parent="issues_menu_1"
+                  action="reportecovid19_reporte_action_window"/>
+
+    </data>
+</odoo>

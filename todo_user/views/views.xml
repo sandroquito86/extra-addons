@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+   <!--REVISAR PROGRAMACION DE BUSQUEDA CAPITULO 3 "Ampliandola vista de árbol y búsqueda"-->
+
+    <!--CAMBIANDO INFORMACION A UNA VISTA DE TIPO ARBOL-->
+	<record id="view_tree_todo_user_inherited"   
+		model="ir.ui.view"> 
+
+		<field name="name">Todo User tree - User 
+		extension</field> 
+
+		<field name="model">ultima_app.datos</field> 
+
+		<field name="inherit_id" ref="ultima_app.list"/>
+
+		<field name="arch" type="xml"> 
+
+		<field name="name" position="after"> 
+			<field name="date_deadline" /> 
+			</field>
+		</field >
+
+	</record>
+
+
+    <!--CAMBIANDO INFORMACION A UNA VISTA DE TIPO FORM-->
+  	<record id="view_form_todo_user_inherited"   
+		  model="ir.ui.view"> 
+
+		
+
+		  
+		<field name="name">Todo User form - User extension</field> 
+		<field name="model">ultima_app.datos</field> 
+		<field name="inherit_id" ref="ultima_app.form"/> 
+
+		<field name="arch" type="xml"> 
+		    <field name="name" position="after">
+		      	<field name="user_id"/>
+		    </field> 
+		    <!--USAMOS PATH CUANDO EL CAMPO APARECE MAS DE UNA VEZ EN LA VISTA-->
+		  	<xpath expr="//field[@name='value']" position="after">
+                     <field name="date_deadline" string="Origen del Producto"/>
+            </xpath>
+
+            <!--SI EL CAMPO APARECE UNA SOLA VEZ PODEMOS USAR ESTA FORMA DE UBICACION-->
+		    <field name="value2" position="attributes"> 
+		      <attribute name="invisible">1</attribute> 
+		    </field> 
+
+		    <field name="description" position="attributes"> 
+		      <attribute name="invisible">1</attribute> 
+		    </field> 
+
+		</field>
+	</record>
+
+  </data>
+</odoo>
